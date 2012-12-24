@@ -59,8 +59,10 @@ echo "forming HTTP requests. If not specified it will default to http://\$HOST"
 echo "Example: http://blog.zx2c4.com or https://someblahblasite.com/my_blog"
 echo
 echo "DBPREFIX is the wordpress prefix used for database table names. It"
-echo "is often \"wp_\", but DBPREFIX defaults to an empty string if not"
-echo "specified."
+echo "is often \"wp_\", which DBPREFIX defaults to if this argument is"
+echo "unspecified. Some wordpress installations will use an empty prefix,"
+echo "and others use a site-specific prefix. Most, however, will use the"
+echo "default."
 echo "Example: wp_"
 echo
 printf "\033[0m"
@@ -71,11 +73,9 @@ if [ $# -lt 1 ]; then
 fi
 
 host="$1"
-urlbase="$2"
-if [ -z "$urlbase" ]; then
-	urlbase="http://$host"
-fi
+urlbase="${2:-http://$host}"
 db_prefix="$3"
+[ $# -lt 3 ] && db_prefix="wp_"
 
 for site_id in {1..25} 0; do for user_id in {1..25}; do
 	query="SELECT * FROM ${db_prefix}users WHERE ID = '$user_id'"
