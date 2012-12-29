@@ -9,7 +9,7 @@
 # For more info, see built-in help text.
 # Most up to date version is available at: http://git.zx2c4.com/w3-total-fail/tree/w3-total-fail.sh
 #
-# This affects all current versions of W3 Total Cache up to and including the latest version, 0.9.2.4.
+# This affects W3 Total Cache <= 0.9.2.4.
 
 set -f
 
